@@ -1,3 +1,7 @@
+node_modules
+
+dist
+
 .yarn/*
 !.yarn/patches
 !.yarn/plugins
@@ -11,3 +15,6 @@
 
 #!.yarn/cache
 .pnp.*
+
+# custom-elements-manifest
+custome-elements.json

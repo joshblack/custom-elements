@@ -1,4 +1,32 @@
 {
-  "name": "list-box-element",
-  "packageManager": "yarn@4.0.1"
+  "name": "custom-elements",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "yarn workspaces foreach -Apt",
+    "build:pkg": "yarn workspaces foreach -Apt --exclude www --exclude 'example-*'",
+    "clean": "yarn workspaces foreach -Ap run clean",
+    "format": "prettier --cache --write '**/*.{js,md,mdx,ts,tsx,yml}'",
+    "format:diff": "prettier --cache --list-different '**/*.{js,md,mdx,ts,tsx,yml}'",
+    "lint": "eslint .",
+    "test": "vitest",
+    "type-check": "tsc --noEmit && yarn workspaces foreach -Ap run type-check"
+  },
+  "devDependencies": {
+    "@testing-library/dom": "^9.3.4",
+    "@testing-library/user-event": "^14.5.2",
+    "@trivago/prettier-plugin-sort-imports": "^4.3.0",
+    "@types/eslint": "^8",
+    "@typescript-eslint/eslint-plugin": "^6.20.0",
+    "@typescript-eslint/parser": "^6.20.0",
+    "eslint": "^8.56.0",
+    "prettier": "^3.2.4",
+    "rimraf": "^5.0.5",
+    "typescript": "^5.3.3",
+    "vitest": "^1.2.2",
+    "vitest-dom": "^0.1.1"
+  }
 }
