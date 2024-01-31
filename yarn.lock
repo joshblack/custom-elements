@@ -2967,9 +2967,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"list-box-element@workspace:packages/listbox-element":
+"listbox-element@workspace:packages/listbox-element":
   version: 0.0.0-use.local
-  resolution: "list-box-element@workspace:packages/listbox-element"
+  resolution: "listbox-element@workspace:packages/listbox-element"
   dependencies:
     "@lit-labs/ssr-dom-shim": "npm:^1.1.2"
     "@rollup/plugin-inject": "npm:^5.0.5"
