@@ -9,6 +9,10 @@ interface SelectOptionEvent {
 }
 
 class ListBoxElement extends HTMLElement {
+  static get observedAttributes() {
+    return ['wrap'];
+  }
+
   #activeOption: OptionElement | null;
   #selectedOption: OptionElement | null;
 
@@ -17,6 +21,18 @@ class ListBoxElement extends HTMLElement {
 
     this.#activeOption = null;
     this.#selectedOption = null;
+  }
+
+  public get wrap() {
+    return this.hasAttribute('wrap');
+  }
+
+  public set wrap(hasWrap) {
+    if (hasWrap) {
+      this.setAttribute('wrap', '');
+    } else {
+      this.removeAttribute('wrap');
+    }
   }
 
   connectedCallback() {
@@ -52,6 +68,20 @@ class ListBoxElement extends HTMLElement {
 
   disconnectedCallback() {
     this.removeEventListener('keydown', this.onKeyDown);
+  }
+
+  attributeChangedCallback(
+    name: string,
+    oldValue: string | null,
+    newValue: string | null,
+  ) {
+    if (oldValue === newValue) {
+      return;
+    }
+
+    if (name === 'wrap') {
+      this.wrap = newValue !== null;
+    }
   }
 
   selectOption(option: OptionElement) {
@@ -98,8 +128,9 @@ class ListBoxElement extends HTMLElement {
       const activeIndex = options.findIndex((option) => {
         return option.getAttribute('tabindex') === '0';
       });
-      // const nextIndex = (activeIndex + 1) % options.length;
-      const nextIndex = Math.min(options.length, activeIndex + 1);
+      const nextIndex = this.wrap
+        ? (activeIndex + 1) % options.length
+        : Math.min(options.length, activeIndex + 1);
       const option = options[nextIndex];
       if (option) {
         this.setActiveOption(option);
@@ -114,8 +145,9 @@ class ListBoxElement extends HTMLElement {
       const activeIndex = options.findIndex((option) => {
         return option.getAttribute('tabindex') === '0';
       });
-      // const nextIndex = (activeIndex - 1 + options.length) % options.length;
-      const nextIndex = Math.max(0, activeIndex - 1);
+      const nextIndex = this.wrap
+        ? (activeIndex - 1 + options.length) % options.length
+        : Math.max(0, activeIndex - 1);
       const option = options[nextIndex];
       if (option) {
         this.setActiveOption(option);
@@ -153,11 +185,11 @@ class OptionElement extends HTMLElement {
     return ['active', 'disabled', 'selected'];
   }
 
-  get active() {
+  public get active() {
     return this.hasAttribute('active');
   }
 
-  set active(isActive) {
+  public set active(isActive) {
     if (isActive) {
       this.setAttribute('active', '');
       this.setAttribute('tabindex', '0');
@@ -167,11 +199,11 @@ class OptionElement extends HTMLElement {
     }
   }
 
-  get selected() {
+  public get selected() {
     return this.hasAttribute('selected');
   }
 
-  set selected(isSelected) {
+  public set selected(isSelected) {
     if (isSelected) {
       this.setAttribute('selected', '');
       this.setAttribute('aria-selected', 'true');
@@ -181,11 +213,11 @@ class OptionElement extends HTMLElement {
     }
   }
 
-  get disabled() {
+  public get disabled() {
     return this.hasAttribute('disabled');
   }
 
-  set disabled(isDisabled) {
+  public set disabled(isDisabled) {
     if (isDisabled) {
       this.setAttribute('disabled', '');
       this.setAttribute('aria-disabled', 'true');
@@ -250,16 +282,10 @@ class OptionElement extends HTMLElement {
       return;
     }
 
-    if (this.disabled) {
-      return;
-    }
-
-    event.preventDefault();
-    event.stopPropagation();
-
-    const listbox = this.getListBox();
-    if (listbox && !this.disabled) {
-      listbox.selectOption(this);
+    if (!this.disabled) {
+      event.preventDefault();
+      event.stopPropagation();
+      this.select();
     }
   };
 
@@ -271,18 +297,27 @@ class OptionElement extends HTMLElement {
   };
 
   onClick = () => {
-    if (this.disabled) {
-      return;
-    }
-
-    const listbox = this.getListBox();
-    if (listbox) {
-      listbox.selectOption(this);
+    if (!this.disabled) {
+      this.select();
     }
   };
 
   getListBox(): ListBoxElement | null {
     return this.closest('x-listbox');
+  }
+
+  select() {
+    const listbox = this.getListBox();
+    if (listbox) {
+      listbox.selectOption(this);
+    }
+    this.dispatchEvent(
+      new CustomEvent<SelectOptionEvent>('select', {
+        detail: {
+          option: this,
+        },
+      }),
+    );
   }
 }
 
@@ -306,6 +341,10 @@ class GroupElement extends HTMLElement {
 }
 
 class GroupLabelElement extends HTMLElement {
+  static get observedAttributes() {
+    return ['id'];
+  }
+
   connectedCallback() {
     if (!this.hasAttribute('id')) {
       this.setAttribute('id', getId());
@@ -314,6 +353,32 @@ class GroupLabelElement extends HTMLElement {
     if (!this.hasAttribute('role')) {
       this.setAttribute('role', 'presentation');
     }
+  }
+
+  attributeChangedCallback(
+    name: string,
+    oldValue: string | null,
+    newValue: string | null,
+  ) {
+    if (oldValue === newValue) {
+      return;
+    }
+
+    if (name === 'id') {
+      const group = this.getGroup();
+      if (newValue !== null) {
+        this.setAttribute('id', newValue);
+        group?.setAttribute('aria-labelledby', newValue);
+      } else {
+        const id = getId();
+        this.setAttribute('id', id);
+        group?.setAttribute('aria-labelledby', id);
+      }
+    }
+  }
+
+  getGroup(): GroupElement | null {
+    return this.closest('x-group');
   }
 }
 
