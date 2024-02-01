@@ -8,7 +8,7 @@ interface SelectOptionEvent {
   option: OptionElement;
 }
 
-class ListBoxElement extends HTMLElement {
+class ListboxElement extends HTMLElement {
   static get observedAttributes() {
     return ['wrap'];
   }
@@ -302,7 +302,7 @@ class OptionElement extends HTMLElement {
     }
   };
 
-  getListBox(): ListBoxElement | null {
+  getListBox(): ListboxElement | null {
     return this.closest('x-listbox');
   }
 
@@ -382,5 +382,5 @@ class GroupLabelElement extends HTMLElement {
   }
 }
 
-export { ListBoxElement, OptionElement, GroupElement, GroupLabelElement };
+export { ListboxElement, OptionElement, GroupElement, GroupLabelElement };
 export type { ActiveOptionEvent, SelectOptionEvent };

@@ -4,16 +4,16 @@ import { createComponent } from '@lit/react';
 import {
   GroupElement,
   GroupLabelElement,
-  ListBoxElement,
+  ListboxElement,
   OptionElement,
   type SelectOptionEvent,
 } from 'listbox-element';
 import 'listbox-element/define';
 import React from 'react';
 
-const ListBox = createComponent({
+const Listbox = createComponent({
   tagName: 'x-listbox',
-  elementClass: ListBoxElement,
+  elementClass: ListboxElement,
   react: React,
   events: {
     onSelectOption: 'selectoption',
@@ -48,7 +48,7 @@ export default function listBoxExample() {
       <main>
         <h1>Listbox example</h1>
         <div id="field">Field</div>
-        <ListBox
+        <Listbox
           aria-labelledby="field"
           className="flex flex-col border"
           onSelectOption={(event: SelectOptionEvent) => {
@@ -63,7 +63,7 @@ export default function listBoxExample() {
             <Option className="hover:bg-gray-100 cursor-pointer">Second</Option>
             <Option className="hover:bg-gray-100 cursor-pointer">Third</Option>
           </Group>
-        </ListBox>
+        </Listbox>
       </main>
     </>
   );
