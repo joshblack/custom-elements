@@ -1,0 +1,124 @@
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+/* Typography */
+html {
+  -moz-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+}
+
+html,
+body {
+  block-size: 100%;
+  inline-size: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Media */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-inline-size: 100%;
+}
+
+/* Text overflow */
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+/* Root stacking context */
+#root,
+#__next {
+  isolation: isolate;
+}
+
+/* Default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd,
+pre,
+code {
+  margin: 0;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role='list'],
+ol[role='list'] {
+  list-style: none;
+}
+
+/* Defaults */
+body {
+  line-height: 1.5;
+  min-block-size: 100vh;
+}
+
+/* Set shorter line heights on headings and interactive elements */
+h1,
+h2,
+h3,
+h4,
+button,
+input,
+label {
+  line-height: 1.1;
+}
+
+/* Balance text wrapping on headings */
+h1,
+h2,
+h3,
+h4 {
+  text-wrap: balance;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  color: currentColor;
+  text-decoration-skip-ink: auto;
+}
+
+/* Make sure textareas without a rows attribute are not tiny */
+textarea:not([rows]) {
+  min-block-size: 10em;
+}
+
+/* Anything that has been anchored to should have extra scroll margin */
+:target {
+  scroll-margin-block: 5ex;
+}

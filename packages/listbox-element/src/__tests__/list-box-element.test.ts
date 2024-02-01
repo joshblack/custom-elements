@@ -1,7 +1,7 @@
 import { screen } from '@testing-library/dom';
 import userEvent from '@testing-library/user-event';
 import { afterEach, describe, expect, test } from 'vitest';
-import '../define.ts';
+import '../define';
 
 const containers = new Set<HTMLElement>();
 

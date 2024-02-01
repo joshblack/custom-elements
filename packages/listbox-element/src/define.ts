@@ -3,7 +3,7 @@ import {
   GroupLabelElement,
   ListBoxElement,
   OptionElement,
-} from './list-box-element';
+} from './element';
 
 customElements.define('x-listbox', ListBoxElement);
 customElements.define('x-option', OptionElement);

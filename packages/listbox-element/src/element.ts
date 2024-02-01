@@ -1,5 +1,13 @@
 import { getId } from './unique-id';
 
+interface ActiveOptionEvent {
+  option: OptionElement;
+}
+
+interface SelectOptionEvent {
+  option: OptionElement;
+}
+
 class ListBoxElement extends HTMLElement {
   #activeOption: OptionElement | null;
   #selectedOption: OptionElement | null;
@@ -21,15 +29,21 @@ class ListBoxElement extends HTMLElement {
       const activeOption = options.find((option) => {
         return option.getAttribute('tabindex') === '0';
       });
-      if (!activeOption) {
+
+      const selectedOption = options.find((option) => {
+        return (
+          option.getAttribute('aria-selected') === 'true' ||
+          option.hasAttribute('selected')
+        );
+      });
+
+      if (!selectedOption && !activeOption) {
         options[0]!.setAttribute('tabindex', '0');
       }
 
-      const selectedOption = options.find((option) => {
-        return option.getAttribute('aria-selected') === 'true';
-      });
       if (selectedOption) {
         this.#selectedOption = selectedOption;
+        selectedOption.setAttribute('tabindex', '0');
       }
     }
 
@@ -46,6 +60,15 @@ class ListBoxElement extends HTMLElement {
     }
     this.#selectedOption = option;
     this.#selectedOption.selected = true;
+
+    this.dispatchEvent(
+      new CustomEvent<SelectOptionEvent>('selectoption', {
+        bubbles: true,
+        detail: {
+          option: this.#selectedOption,
+        },
+      }),
+    );
   }
 
   setActiveOption(option: OptionElement) {
@@ -55,6 +78,15 @@ class ListBoxElement extends HTMLElement {
     this.#activeOption = option;
     this.#activeOption.active = true;
     this.#activeOption.focus();
+
+    this.dispatchEvent(
+      new CustomEvent<ActiveOptionEvent>('activeoption', {
+        bubbles: true,
+        detail: {
+          option: this.#activeOption,
+        },
+      }),
+    );
   }
 
   onKeyDown = (event: KeyboardEvent) => {
@@ -286,3 +318,4 @@ class GroupLabelElement extends HTMLElement {
 }
 
 export { ListBoxElement, OptionElement, GroupElement, GroupLabelElement };
+export type { ActiveOptionEvent, SelectOptionEvent };

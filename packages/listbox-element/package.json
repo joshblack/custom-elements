@@ -20,6 +20,7 @@
   "scripts": {
     "build": "yarn clean && rollup -c",
     "clean": "rimraf dist",
+    "type-check": "tsc --noEmit",
     "watch": "yarn clean && rollup -c -w"
   },
   "peerDependencies": {

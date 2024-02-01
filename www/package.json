@@ -1,0 +1,29 @@
+{
+  "name": "www",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "next build",
+    "clean": "rimraf .next",
+    "develop": "next",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "listbox-element": "^0.1.0",
+    "next": "^14.1.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@lit/react": "^1.0.3",
+    "@types/node": "^20.11.14",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "autoprefixer": "^10.4.17",
+    "postcss": "^8.4.33",
+    "rimraf": "^5.0.5",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5.3.3"
+  },
+  "packageManager": "yarn@4.1.0"
+}

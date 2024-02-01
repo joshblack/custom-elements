@@ -1,7 +1,10 @@
+# Dependency folders
 node_modules
 
+# Package build folders
 dist
 
+# Yarn
 .yarn/*
 !.yarn/patches
 !.yarn/plugins
@@ -18,3 +21,9 @@ dist
 
 # custom-elements-manifest
 custome-elements.json
+
+# Next.js
+.next
+
+# TypeScript
+*.tsbuildinfo

@@ -3,11 +3,12 @@
   "private": true,
   "type": "module",
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "www"
   ],
   "scripts": {
-    "build": "yarn workspaces foreach -Apt",
-    "build:pkg": "yarn workspaces foreach -Apt --exclude www --exclude 'example-*'",
+    "build": "yarn workspaces foreach -Apt --exclude custom-elements run build",
+    "build:pkg": "yarn workspaces foreach -Apt --exclude custom-elements --exclude www --exclude 'example-*' run build",
     "clean": "yarn workspaces foreach -Ap run clean",
     "format": "prettier --cache --write '**/*.{js,md,mdx,ts,tsx,yml}'",
     "format:diff": "prettier --cache --list-different '**/*.{js,md,mdx,ts,tsx,yml}'",

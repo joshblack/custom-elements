@@ -1,6 +1,12 @@
-export {
-  ListBoxElement,
-  OptionElement,
+import {
+  type ActiveOptionEvent as ActiveOptionCustomEvent,
   GroupElement,
   GroupLabelElement,
-} from './list-box-element';
+  ListBoxElement,
+  OptionElement,
+  type SelectOptionEvent as SelectOptionCustomEvent,
+} from './element';
+
+export { ListBoxElement, OptionElement, GroupElement, GroupLabelElement };
+export type ActiveOptionEvent = CustomEvent<ActiveOptionCustomEvent>;
+export type SelectOptionEvent = CustomEvent<SelectOptionCustomEvent>;
