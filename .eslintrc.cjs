@@ -13,7 +13,7 @@ const config = {
     },
     sourceType: 'module',
   },
-  extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended'],
+  extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended', 'plugin:storybook/recommended'],
   settings: {},
   env: {
     browser: true,

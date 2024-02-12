@@ -8,6 +8,15 @@ interface SelectOptionEvent {
   option: OptionElement;
 }
 
+// x-listbox
+//   x-option active, selected -> (aria-selected="true"), disabled -> (aria-disabled="true")
+//   x-option
+//   x-option
+//   x-group
+//     x-group-label
+//     x-option
+//     x-option
+
 class ListboxElement extends HTMLElement {
   static get observedAttributes() {
     return ['wrap'];

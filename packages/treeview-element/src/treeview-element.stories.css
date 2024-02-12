@@ -1,0 +1,45 @@
+x-treeview {
+  display: flex;
+  flex-direction: column;
+}
+
+x-treeitem {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  text-decoration: none;
+}
+
+x-treeitem:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+x-treeitem[selected] {
+  background-color: rgba(0, 0, 0, 0.15);
+}
+
+x-treeitemgroup {
+  display: none;
+  padding-inline-start: 1.5rem;
+}
+
+x-treeitem[expanded] > x-treeitemgroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.treeitem-title {
+  display: flex;
+  align-items: center;
+  column-gap: 0.5rem;
+}
+
+.treeitem-expander::before {
+  content: '👉';
+  display: block;
+}
+
+x-treeitem[expanded] .treeitem-expander::before {
+  content: '👇';
+}
