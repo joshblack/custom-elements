@@ -42,7 +42,7 @@ class TreeView extends HTMLElement {
       event.stopPropagation();
 
       this.setFirstItemAsActive();
-    }else if (event.key === 'End') {
+    } else if (event.key === 'End') {
       event.preventDefault();
       event.stopPropagation();
 
@@ -151,7 +151,10 @@ class TreeView extends HTMLElement {
       this.#typeaheadTimeoutId = null;
     }
 
-    this.#typeaheadText = this.#typeaheadText === null ? character : this.#typeaheadText + character;
+    this.#typeaheadText =
+      this.#typeaheadText === null
+        ? character
+        : this.#typeaheadText + character;
     this.#typeaheadTimeoutId = window.setTimeout(() => {
       this.focusItemMatchingTypeahead();
       this.#typeaheadText = null;
@@ -166,7 +169,7 @@ class TreeView extends HTMLElement {
     const typeahead = this.#typeaheadText.toLowerCase();
     const items = this.getFocusableItems();
     let activeItemIndex = items.findIndex((item) => {
-      return item === this.#activeItem
+      return item === this.#activeItem;
     });
     if (activeItemIndex === -1) {
       activeItemIndex = 0;
@@ -276,7 +279,9 @@ class TreeItem extends HTMLElement {
       this.setAttribute('aria-level', '1');
     }
 
-    this.expanded = this.isExpandable() ? this.getAttribute('expanded') === '' : false;
+    this.expanded = this.isExpandable()
+      ? this.getAttribute('expanded') === ''
+      : false;
     this.selected = this.getAttribute('selected') === '';
     this.disabled = this.getAttribute('disabled') === '';
 
