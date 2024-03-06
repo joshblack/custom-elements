@@ -6700,37 +6700,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"focusable-content-element@workspace:packages/focusable-content-element":
-  version: 0.0.0-use.local
-  resolution: "focusable-content-element@workspace:packages/focusable-content-element"
-  dependencies:
-    "@babel/core": "npm:^7.23.9"
-    "@babel/plugin-proposal-decorators": "npm:^7.23.9"
-    "@babel/plugin-transform-runtime": "npm:^7.23.9"
-    "@babel/preset-env": "npm:^7.23.9"
-    "@babel/preset-typescript": "npm:^7.23.3"
-    "@babel/runtime": "npm:^7.23.9"
-    "@lit-labs/ssr-dom-shim": "npm:^1.1.2"
-    "@rollup/plugin-babel": "npm:^6.0.4"
-    "@rollup/plugin-inject": "npm:^5.0.5"
-    "@rollup/plugin-node-resolve": "npm:^15.2.3"
-    "@rollup/plugin-replace": "npm:^5.0.5"
-    "@types/babel__core": "npm:^7"
-    "@types/babel__plugin-transform-runtime": "npm:^7"
-    "@types/babel__preset-env": "npm:^7"
-    concurrently: "npm:^8.2.2"
-    jsdom: "npm:^24.0.0"
-    rimraf: "npm:^5.0.5"
-    rollup: "npm:^4.9.6"
-    typescript: "npm:^5.3.3"
-  peerDependencies:
-    typescript: ^5.3.3
-  peerDependenciesMeta:
-    typescript:
-      optional: true
-  languageName: unknown
-  linkType: soft
-
 "for-each@npm:^0.3.3":
   version: 0.3.3
   resolution: "for-each@npm:0.3.3"
