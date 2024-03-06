@@ -8,14 +8,35 @@ interface SelectOptionEvent {
   option: OptionElement;
 }
 
-// x-listbox
-//   x-option active, selected -> (aria-selected="true"), disabled -> (aria-disabled="true")
-//   x-option
-//   x-option
-//   x-group
-//     x-group-label
-//     x-option
-//     x-option
+class ListboxChangeEvent extends Event {
+  #activeOption: OptionElement | null;
+  #selectedOption: OptionElement | null;
+
+  constructor({
+    activeOption,
+    selectedOption,
+    ...init
+  }: EventInit & {
+    selectedOption?: OptionElement;
+    activeOption?: OptionElement;
+  }) {
+    super('listbox-change', {
+      ...init,
+      bubbles: true,
+      composed: true,
+    });
+    this.#activeOption = activeOption ?? null;
+    this.#selectedOption = selectedOption ?? null;
+  }
+
+  get activeOption() {
+    return this.#activeOption;
+  }
+
+  get selectedOption() {
+    return this.#selectedOption;
+  }
+}
 
 class ListboxElement extends HTMLElement {
   static get observedAttributes() {
@@ -144,9 +165,7 @@ class ListboxElement extends HTMLElement {
       if (option) {
         this.setActiveOption(option);
       }
-    }
-
-    if (event.key === 'ArrowUp') {
+    } else if (event.key === 'ArrowUp') {
       event.preventDefault();
       event.stopPropagation();
 
@@ -161,9 +180,7 @@ class ListboxElement extends HTMLElement {
       if (option) {
         this.setActiveOption(option);
       }
-    }
-
-    if (event.key === 'Home') {
+    } else if (event.key === 'Home') {
       event.preventDefault();
       event.stopPropagation();
       const options = this.getOptions();
@@ -171,9 +188,7 @@ class ListboxElement extends HTMLElement {
       if (firstOption) {
         this.setActiveOption(firstOption);
       }
-    }
-
-    if (event.key === 'End') {
+    } else if (event.key === 'End') {
       event.preventDefault();
       event.stopPropagation();
       const options = this.getOptions();
@@ -181,12 +196,16 @@ class ListboxElement extends HTMLElement {
       if (lastOption) {
         this.setActiveOption(lastOption);
       }
+    } else {
+      // typeahad
     }
   };
 
   getOptions(): Array<OptionElement> {
     return Array.from(this.querySelectorAll('x-option'));
   }
+
+  typeahead() {}
 }
 
 class OptionElement extends HTMLElement {
