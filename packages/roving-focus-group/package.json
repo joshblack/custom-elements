@@ -7,11 +7,6 @@
       "types": "./dist/index.d.ts",
       "node": "./dist/node/index.js",
       "default": "./dist/index.js"
-    },
-    "./define": {
-      "types": "./dist/define.d.ts",
-      "node": "./dist/node/define.js",
-      "default": "./dist/define.js"
     }
   },
   "files": [
@@ -21,7 +16,9 @@
     "src/index.ts",
     "src/define.ts",
     "dist/index.js",
-    "dist/define.js"
+    "dist/define.js",
+    "dist/node/index.js",
+    "dist/node/define.js"
   ],
   "scripts": {
     "build": "yarn clean && rollup -c && yarn build:ts",

@@ -34,6 +34,7 @@ class RovingFocusGroupElement extends HTMLElement {
     }
 
     this.addEventListener('keydown', this.onKeyDown);
+    this.addEventListener('focusin', this.onFocusIn);
     this.setInitialActiveElement();
 
     // Note: do we need a mutation observer for when elements are added and
@@ -77,6 +78,18 @@ class RovingFocusGroupElement extends HTMLElement {
         this.focusNextElement();
       }
       return;
+    }
+  };
+
+  onFocusIn = () => {
+    const elements = getFocusableElements(this);
+    const activeElement = getActiveElement();
+    for (const element of elements) {
+      if (element === activeElement) {
+        element.setAttribute('tabindex', '0');
+      } else {
+        element.setAttribute('tabindex', '-1');
+      }
     }
   };
 

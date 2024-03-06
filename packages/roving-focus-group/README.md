@@ -1,14 +1,13 @@
-# listbox-element
+# roving-focus-group-element
 
-> A custom element for working with the [`listbox`
-> role](https://w3c.github.io/aria/#listbox)
+> A custom element for working with roving focus
 
 ## Getting started
 
-To install `listbox-element` in your project, you will need to run the following command using [npm](https://www.npmjs.com/):
+To install `roving-focus-group-element` in your project, you will need to run the following command using [npm](https://www.npmjs.com/):
 
 ```bash
-npm install listbox-element --save
+npm install roving-focus-group-element --save
 ```
 
 ## Usage
