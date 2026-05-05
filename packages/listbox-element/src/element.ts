@@ -160,7 +160,7 @@ class ListboxElement extends HTMLElement {
       });
       const nextIndex = this.wrap
         ? (activeIndex + 1) % options.length
-        : Math.min(options.length, activeIndex + 1);
+        : Math.min(options.length - 1, activeIndex + 1);
       const option = options[nextIndex];
       if (option) {
         this.setActiveOption(option);
@@ -174,7 +174,9 @@ class ListboxElement extends HTMLElement {
         return option.getAttribute('tabindex') === '0';
       });
       const nextIndex = this.wrap
-        ? (activeIndex - 1 + options.length) % options.length
+        ? (activeIndex === -1
+            ? options.length - 1
+            : activeIndex + options.length - 1) % options.length
         : Math.max(0, activeIndex - 1);
       const option = options[nextIndex];
       if (option) {
